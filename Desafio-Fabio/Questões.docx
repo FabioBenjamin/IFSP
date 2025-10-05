@@ -1,0 +1,25 @@
+1. R: Fornecedor é a superclasse - Classe mais genérica. Ela possui  atributos e
+métodos que são comuns a todos os fornecedores .
+
+2. R: No diagrama UML, essas setas indicam uma relação de herança. Ou seja, a classe FornecedorPessoa 
+e FornecedorEmpresa são classes "filho" da classe Fornecedor
+
+3. R:Sim. Os métodos construtores são identificados pelos métodos que possuem o mesmo nome que a classe. 
+Nesse caso "FornecedorPessoa()" e "FornecedorEmpresa()"
+
+4. R: 
+Classe Fornecedor:construtor = Fornecedor(nome:string, fone:string) getters = getNome() : string ; getFone() : string <> setters = setNome(nome:string), setFone(fone:string);
+Classe FornecedorPessoa: construtor = FornecedorPessoa(nome:string, fone:string, rg:string,cpf:string) getters = getRg() : string ; getCpf() : string <> setters = setRg(rg:string), setCpf(cpf:string);
+Classe FornecedorEmpresa: construtor = FornecedorEmpresa(nome:string, fone:string, ie:string, cnpj:string) getters = getie() : string ; getcnpj() : string <> setters = setie(ie:string), setcnpj(cnpj:string);
+
+5. R: public/público
+
+6. R: Os métodos setter das classes são os responsáveis por receberem os argumentos enviados 
+por outros métodos, por exemplo: "setie(ie:string)" que reescreve o valor do atributo ie.
+
+7. R: Os métodos getter das classes são os responsáveis por recuperarem os 
+conteúdos dos atributos e devolveram para os métodos, por exemplo: "getie()" que retorna o valor do atributo ie.
+
+8. R: Faz referencia a instancia atual do objeto da classe.
+
+9. R: Instancia um objeto da classe mãe 
