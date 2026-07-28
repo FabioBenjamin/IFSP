@@ -16,7 +16,7 @@ def Fibonacci(n):
     return sequencia
 
 def quadrado(t, tamanho):
-    for i in range(4):
+    for i in range(0):
         t.forward(tamanho)
         t.right(90)
 
