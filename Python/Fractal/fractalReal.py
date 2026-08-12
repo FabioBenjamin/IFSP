@@ -1,5 +1,4 @@
 import turtle
-from email.policy import default
 
 ay = turtle.Turtle()
 ay.speed(10)
@@ -38,25 +37,34 @@ maximo = n-1
 perguntaTamanho = tela.numinput(
     "MACACOS VOADORES",
     f"Digite o tamanho (máximo {maximo}):",
-    default=min(20, maximo),
-    minval=2,
-    maxval=maximo
+    default = min(20, maximo),
+    minval = 2,
+    maxval = maximo
 )
 
-# Cor da tela
-cor = tela.colormode(255)
-
-peguntaCor = tela.textinput(
-    "ESCOLHA MACACO",
-    f"Escolha um numero para iniciar (máximo {cor})",
-    default = min(20, cor)
+# Pergunta da Escolha da Cor
+cor = tela.textinput(
+    "Escolha da cor",
+    "Digite uma cor (ex: red, blue, green, purple):"
 )
+
+ay.color(cor)
+
+# Pergunta da Direção
+direcao = tela.numinput(
+    "Escolha da direção",
+    "Digite a direção (ex: 90, 180):",
+    default = 0,
+    minval = 0,
+    maxval = 270
+)
+
+ay.setheading(direcao)
 
 def quadrado(t, tamanho):
     for i in range(4):
         t.forward(tamanho)
         t.left(90)
-
 
 def espirral(t, tamanhos):
     for tamanho in tamanhos:
@@ -64,7 +72,7 @@ def espirral(t, tamanhos):
 
         t.circle(tamanho, 90)
 
-numeros = Fibonacci(20)
+numeros = Fibonacci(int(perguntaTamanho))
 
 escala = limite / max(numeros)
 
