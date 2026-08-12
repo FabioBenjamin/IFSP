@@ -1,0 +1,143 @@
+import turtle
+
+turtle.colormode(255)
+tela = turtle.Screen()
+
+larguraMaxima = tela.cv.winfo_screenwidth()
+alturaMaxima = tela.cv.winfo_screenheight()
+tela.setup(width = larguraMaxima, height = alturaMaxima)
+
+ay = turtle.Turtle()
+ay.speed(10)
+ay.pensize(3)
+
+def Fibonacci(n):
+    sequencia = [1, 1]
+
+    while len(sequencia) < n:
+        proximo = sequencia[-1] + sequencia[-2]
+        sequencia.append(proximo)
+
+    return sequencia
+
+
+# Descobrir limite
+
+largura = tela.window_width()
+altura = tela.window_height()
+limite = min(largura, altura) * 0.4
+
+n = 1
+while True:
+
+    Numero = Fibonacci(n)
+
+    if max(Numero) > limite:
+        break
+
+    n += 1
+
+maximo = n - 1
+
+# Pergunta Usuário
+perguntaTamanho = tela.numinput(
+    "MACACOS VOADORES",
+    f"Digite o tamanho (máximo {maximo}):",
+    default=min(20, maximo),
+    minval=2,
+    maxval=maximo
+)
+
+# Pergunta da Escolha da Cor
+cor = tela.textinput(
+    "MACACOS VOADORES",
+    "Escolha uma cor (vermelho, verde ou azul): "
+).lower()
+
+# Definição do RGB
+if cor == "vermelho":
+    componente = 0
+elif cor == "verde":
+    componente = 1
+elif cor == "azul":
+    componente = 2
+else:
+    print("Cor inválida!")
+    turtle.done()
+    exit()
+
+# Pergunta da Direção
+direcao = tela.numinput(
+    "Escolha da direção",
+    "Digite a direção (ex: 90, 180):",
+    default=0,
+    minval=0,
+    maxval=270
+)
+
+ay.setheading(direcao)
+
+
+def quadrado(t, tamanho):
+    for i in range(4):
+        t.forward(tamanho)
+        t.left(90)
+
+def tamanhoTela(tamanho):
+
+    # Posição atual
+    a = abs(ay.xcor())
+    b = abs(ay.ycor())
+
+    # Tamanho da janela
+    largura = tela.window_width()
+    altura = tela.window_height()
+
+    limiteA = largura * 0.40
+    limiteB = altura * 0.40
+
+    # Verificação da borda
+    expansao = (a > limiteA or
+                b > limiteB or
+                tamanho > limiteA or
+                tamanho > limiteB)
+
+    if expansao:
+        larguraNova = min(largura + 300, larguraMaxima)
+        alturaNova = min(altura + 200, alturaMaxima)
+
+        tela.setup(width = int(larguraNova), height = int(alturaNova))
+
+def espirral(t, tamanhos, numeros, componente):
+
+    menor = min(numeros)
+    maior = max(numeros)
+
+    for tamanho, numero in zip(tamanhos, numeros):
+
+        # Normaliza o Fibonacci entre 0 e 255
+        if maior == menor:
+            valor = 255
+        else:
+            valor = int(
+                255 * (numero - menor) / (maior - menor)
+            )
+
+        # Cria RGB
+        rgb = [0, 0, 0]
+        rgb[componente] = valor
+
+        # Aplicação
+        t.color(rgb[0], rgb[1], rgb[2])
+
+        # Criação do desenho
+        quadrado(t, tamanho)
+        t.circle(tamanho, 90)
+
+numeros = Fibonacci(int(perguntaTamanho))
+
+tamanhos = numeros.copy()
+
+espirral(ay, tamanhos ,numeros, componente)
+
+turtle.done()
