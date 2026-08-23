@@ -1,0 +1,108 @@
+import turtle
+import time
+
+ay = turtle.Turtle()
+ay.speed(10)
+ay.pensize(3)
+
+# Tamanho da tela
+tela = turtle.Screen()
+larguraMax = tela.window_width()
+alturaMax = tela.window_height()
+
+# Lista das cores PT-BR
+cores = {
+    "vermelho": "red",
+    "azul": "blue",
+    "verde": "green",
+    "roxo": "purple",
+    "amarelo": "yellow",
+    "rosa": "pink"
+}
+
+# Limite da tela
+limite = min(larguraMax, alturaMax) * 0.4
+
+def Fibonacci(n):
+    sequencia = [1,1]
+
+    while len(sequencia) < n:
+        proximo = sequencia[-1] + sequencia[-2]
+        sequencia.append(proximo)
+
+    return sequencia
+
+# Descobrir limite
+n = 1
+while True:
+
+    Numero = Fibonacci(n)
+
+    if max(Numero) > limite:
+        break
+
+    n+=1
+maximo = n-1
+
+# Pergunta Usuário
+perguntaTamanho = tela.numinput(
+    "Espirais doidas",
+    f"Digite o tamanho (máximo {maximo}):",
+    default = min(20, maximo),
+    minval = 2,
+    maxval = maximo
+)
+
+# Pergunta da Escolha da Cor
+cor = tela.textinput(
+    "Escolha da cor",
+    "Digite uma cor (ex: Vermelho, Azul, Verde, Roxo):"
+)
+
+if cor and cor.lower() in cores:
+    corIngles = cores[cor.lower()]
+    ay.color(corIngles)
+
+else:
+    print("Cor não encontrada ou inválida.")
+    ay.color("black") # Deixa padrão caso o usuário digite errado
+
+# Pergunta da Direção
+direcao = tela.numinput(
+    "Escolha da direção",
+    "Digite a direção (ex: 90, 180):",
+    default = 0,
+    minval = 0,
+    maxval = 270
+)
+
+ay.setheading(direcao)
+
+def quadrado(t, tamanho):
+    for i in range(4):
+        t.forward(tamanho)
+        t.left(90)
+
+# Tamanho da janela
+
+largura = 400
+altura = 400
+
+tela.setup(w)
+
+def espirral(t, tamanhos):
+    for tamanho in tamanhos:
+        quadrado(t, tamanho)
+
+        t.circle(tamanho, 90)
+
+numeros = Fibonacci(int(perguntaTamanho))
+
+escala = limite / max(numeros)
+
+# Redimensiona todos os números
+numeros = [n * escala for n in numeros]
+
+espirral(ay, numeros)
+
+turtle.done()
