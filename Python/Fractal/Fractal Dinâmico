@@ -88,13 +88,37 @@ def quadrado(t, tamanho):
 largura = 400
 altura = 400
 
-tela.setup(w)
+tela.setup(largura, altura)
 
 def espirral(t, tamanhos):
     for tamanho in tamanhos:
         quadrado(t, tamanho)
 
         t.circle(tamanho, 90)
+
+        # Posição atual do turtle 
+        x = abs(t.xcor())
+        y = abs(t.ycor())
+
+        # Maior distância do centro
+        distancia = max(x, y)
+
+        # Calcula o tamanho necessário
+        tamanhoNovo = int((distancia + 100) * 2)
+
+        # Limite da tela
+        tamanhoNovo = min(tamanhoNovo, larguraMax, alturaMax)
+
+        # Aumento da tela caso seja necessário 
+        if tamanhoNovo > largura:
+
+            larguraAtual = tamanhoNovo
+            alturaAtual = tamanhoNovo
+
+            tela.setup(width = larguraAtual, height = alturaAtual)
+
+            # Pausa para visualizar o crescimento
+            time.sleep(0.05)
 
 numeros = Fibonacci(int(perguntaTamanho))
 
