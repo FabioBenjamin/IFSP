@@ -91,15 +91,15 @@ class Simulador:
         self.y = y
         self.heading = heading
 
-        self.minX = x, 
+        self.minX = x
         self.maxX = x
-        self.minY = y, 
+        self.minY = y
         self.maxY = y
 
     def atualizarLimites(self):
-        self.minX = min(self.minX, self.x), 
+        self.minX = min(self.minX, self.x)
         self.maxX = max(self.maxX, self.x)
-        self.minY = min(self.minY, self.y), 
+        self.minY = min(self.minY, self.y) 
         self.maxY = max(self.maxY, self.y)
 
     def forward(self, tamanho):
@@ -204,13 +204,25 @@ def mouse(event):
     # Cria o novo zoom
     novoZoom = zoom
 
+    # Windows 
+    
     # Aproximação
-    if event.delta > 0:
-        novoZoom *= 1.2
+    if hasattr(event, "delta") and event.delta != 0:
+        if event.delta > 0:
+            novoZoom *= 1.2
 
     # Afastar
-    else:
-        novoZoom *= 0.9
+        else:
+            novoZoom *= 0.9
+
+    # Linux
+    elif hasattr(event, "num"):
+        if event.num == 4:       # roda para cima
+            novoZoom *= 1.2
+        elif event.num == 5:     # roda para baixo
+            novoZoom *= 0.9
+        else:
+            return
 
     # Impede ficar muito pequeno
     if novoZoom < zoomMin:
