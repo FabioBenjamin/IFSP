@@ -21,7 +21,14 @@ O intuito é manter um código limpo, documentado e de fácil consulta, refletin
 
 ## :books: Estrutura do Repositório por Matérias e Tecnologias
 
-O projeto está dividido nas seguintes pastas principais:
+```text
+📦 IFSP/
+ ┣ 📂 Banco-De-Dados/  # Modelagem, SQL, consultas e projetos com SGBDs
+ ┣ 📂 HTML/            # Estruturação web, marcações e interfaces
+ ┣ 📂 Java/            # Programação Orientada a Objetos, lógica e sistemas em Java
+ ┣ 📂 Javascript/      # Scripts, lógica web e manipulação do DOM
+ ┗ 📂 Python/          # Algoritmos, automações e lógica de programação
+```
 
 ### 🗃️ Banco-De-Dados
 * Modelagem de dados (Conceitual e Lógica);
